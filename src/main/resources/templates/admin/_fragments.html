@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <!--在线引入semantic的css样式-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"/>
+    <!--引入外部的自定义的css样式-->
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}"/>
+    <!--引入typo的css样式-->
+    <link rel="stylesheet" href="../../static/css/typo.css" th:href="@{/css/typo.css}"/>
+    <!--引入动画的css样式-->
+    <link rel="stylesheet" href="../../static/css/animate.css" th:href="@{/css/animate.css}"/>
+    <!--引入代码高亮的css样式-->
+    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}"/>
+    <!--引入目录生成的css样式-->
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}"/>
+    <!--引入makeDown的css样式-->
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
+    <title th:replace="${title}">博客详情页</title>
+</head>
+<body>
+<!--导航start-->
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <!--容器-->
+    <div class="ui container">
+        <!--stackable 页面可堆叠-->
+        <div class="ui inverted secondary stackable menu ">
+            <h2 class="ui teal header item">后台管理</h2>
+            <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
+            <a href="#" th:href="@{/admin/tag}"  class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>标签</a>
+            <div class="right item menu m-mobile-hide">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../../static/image/headportrait.jpg" th:src="@{${session.user.avatar}}" alt="" class="ui avatar image">
+                        <span th:text="${session.user.nickName}">阙志鹏</span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui mymenu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--导航end-->
+<!--底部footer start-->
+<footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <h4 class="ui inverted header">关注公众号</h4>
+                    </div>
+                    <div class="item">
+                        <img src="../static/image/qzp.jpg" th:src="@{/image/qzp.jpg}" class="ui rounded image" alt="" style="width: 100px;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">最新消息</a>
+                    <a href="#" class="item">最新消息</a>
+                    <a href="#" class="item">最新消息</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header ">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email:2014267082@qq.com</a>
+                    <a href="#" class="item">QQ:2014267082</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header ">关于我</h4>
+                <p class="m-text-thin m-opacity-mini">这是我的个人博客，会分享关于编程、写作、思考相关的任何内容，希望可以给浏览本网站的你提供一定的帮助！</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright © www.qzp.com All Rights Reserved</p>
+    </div>
+</footer>
+<th:block th:fragment="script">
+    <!--在线引入semantic的js和jquery的js-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+    <!--在线引入semantic的js样式-->
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <!--引入代码高亮的js-->
+    <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <!--引入生成目录的js-->
+    <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+    <!--引入二维码自动生成的js-->
+    <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+    <!--引入平滑滚动的在线的js-->
+    <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+    <!--引入滚动侦测的js-->
+    <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+    <!--引入makedown的js文件-->
+    <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+</th:block>
+</body>
+</html>

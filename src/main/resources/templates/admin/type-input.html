@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <!--在线引入semantic的css样式-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <!--引入外部的自定义的css样式-->
+    <link rel="stylesheet" href="../../static/css/me.css"/>
+    <!--外部引入MakeDown的css样式-->
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
+    <title>博客分类新增页面</title>
+</head>
+<body>
+<!--导航start-->
+<nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <!--容器-->
+    <div class="ui container">
+        <!--stackable 页面可堆叠-->
+        <div class="ui inverted secondary stackable menu ">
+            <h2 class="ui teal header item">后台管理</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>博客</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+            <div class="right item menu m-mobile-hide">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../../static/image/headportrait.jpg" alt="" class="ui avatar image">
+                        阙志鹏
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                        <a href="#" class="item">修改密码</a>
+                        <a href="#" class="item">账户切换</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui mymenu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--二级菜单start-->
+<div class="ui attached menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/types/add}" class="active item">新增</a>
+            <a href="#" th:href="@{/admin/types}" class="teal item">列表</a>
+        </div>
+    </div>
+</div>
+<!--二级菜单end-->
+
+<!--导航end-->
+<!--内容start-->
+<div class="m-container m-padded-tb-big">
+    <div class="ui container">
+        <!--表格start-->
+        <form action="#" method="post" class="ui form m-margin-tb-bu" th:object="${type}" th:action="*{id} == null ? @{/admin/type} : @{/admin/type/{id}(id=*{id})}">
+            <!--隐藏域-->
+            <input type="hidden" name="id" th:value="*{id}">
+            <!--博客文章中的分类-start-->
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">名称</label>
+                    <input type="text" name="name" placeholder="分类名称" th:value="*{name}">
+                </div>
+            </div>
+            <!--博客文章中的分类-end-->
+
+            <div class="ui right aligned container">
+                <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui teal  button">提交</button>
+            </div>
+
+            <!--错误信息提示-->
+            <div class="ui error message"></div>
+            <!--/*/
+            <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                <i class="close icon"></i>
+                <div class="header">验证失败:</div>
+                <p th:errors="*{name}">提交信息不符合规则</p>
+            </div>
+            /*/-->
+        </form>
+        <!--表格-end-->
+    </div>
+</div>
+<!--内容end-->
+<!--底部footer start-->
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <h4 class="ui inverted header">关注公众号</h4>
+                    </div>
+                    <div class="item">
+                        <img src="../../static/image/qzp.jpg" class="ui rounded image" alt="" style="width: 100px;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">最新消息</a>
+                    <a href="#" class="item">最新消息</a>
+                    <a href="#" class="item">最新消息</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header ">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email:2014267082@qq.com</a>
+                    <a href="#" class="item">QQ:2014267082</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header ">关于我</h4>
+                <p class="m-text-thin m-opacity-mini">这是我的个人博客，会分享关于编程、写作、思考相关的任何内容，希望可以给浏览本网站的你提供一定的帮助！</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright © www.qzp.com All Rights Reserved</p>
+    </div>
+</footer>
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+<!--在线引入semantic的js和jquery的js-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+<!--在线引入semantic的js样式-->
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+<!--底部footer end-->
+<script type="text/javascript">
+    /*--打开手机端页面的按钮事件--*/
+    $('.mymenu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    /*--启动下拉框的行为--*/
+    $('.ui.dropdown').dropdown({
+        on : "hover"
+    });
+
+    $('.ui.form').form({
+        fields:{
+            title:{
+                identifier:'name',
+                rules:[{
+                    type:'empty',
+                    prompt: '请输入分类名称！'
+                }]
+            }
+        }
+    });
+
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+</script>
+
+</body>
+</html>

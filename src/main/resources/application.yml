@@ -1,0 +1,12 @@
+spring:
+  thymeleaf:
+    mode: HTML
+  profiles:
+    active: dev
+# 配置项目热部署
+  devtools:
+    restart:
+      enabled: true
+
+# 赋值给变量
+comment.avatar: /image/avatar.jpg

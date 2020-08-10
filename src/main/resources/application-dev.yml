@@ -1,0 +1,21 @@
+#  mysql数据库连接
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.56.101:3306/blog?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: quezhipeng
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#  日志配置
+logging:
+  level:
+    root: info
+    com.qzp.blog: debug
+  file:
+    path: /log/blog-dev.log
+#   开发端口号
+server:
+  port: 8080
